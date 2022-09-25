@@ -259,7 +259,6 @@
     </div>
     <script>
       function update_wifi_list(){
-          
           console.log("updating wifi list");
           loading_img = document.getElementById("loading_gif");
           loading_img.style.display = "block";
@@ -340,15 +339,6 @@
 
     </script> 
 </div>
-<!-- File modal -->
-<div id="file_modal" class="modal">
-
-    <div class="modal-content">
-      <span class="close4">&times;</span>
-      <p>File open modal</p>
-    </div>
-  
-</div>
 
 <div class="btn-group" style="width:100%">
     <h1 style="margin: 0; position: absolute; left: 50%; top: 5%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);">Raspberry Pi settings</h1>
@@ -392,12 +382,10 @@
     static_ip_modal = document.getElementById("static_ip_modal");
     username_password_modal = document.getElementById("username_password_modal");
     wifi_modal = document.getElementById("wifi_modal");
-    file_modal = document.getElementById("file_modal");
     // Get the <span> element that closes the modal
     span1 = document.getElementsByClassName("close1")[0];
     span2 = document.getElementsByClassName("close2")[0];
     span3 = document.getElementsByClassName("close3")[0];
-    span4 = document.getElementsByClassName("close4")[0];
     // When the user clicks on the button, open the modal
     static_ip_button.onclick = function() {
       static_ip_modal.style.display = "block";
@@ -418,9 +406,6 @@
           if (this.responseText != 'done') {
             alert(this.responseText);
           }
-          else {
-            file_modal.style.display = "block";
-          }
         }
       };
       xhttp.open("POST", "/open_folder", true);
@@ -437,9 +422,6 @@
     span3.onclick = function() {
       wifi_modal.style.display = "none";
     }
-    span4.onclick = function() {
-      file_modal.style.display = "none";
-    }
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
       if (event.target == static_ip_modal) {
@@ -450,9 +432,6 @@
       }
       if (event.target == wifi_modal) {
         wifi_modal.style.display = "none";
-      }
-      if (event.target == file_modal) {
-        file_modal.style.display = "none";
       }
     }
 </script>
