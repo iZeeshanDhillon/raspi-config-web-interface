@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const port = 3000 
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 })
 
 //create route for form submission
-app.post('/static_ip', (req, res) => {
+app.post('/static_ip', (req, res) => { 
     
     //get request parameters
     var ip = req.body.ip;
