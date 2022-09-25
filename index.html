@@ -305,11 +305,15 @@
             button.style.backgroundColor = "green";
             button.innerHTML = "WiFi ON";
             button.title = "Click to turn OFF";
+            update_wifi_list();
           }
           else {
             button.style.backgroundColor = "red";
             button.innerHTML = "WiFi OFF";
             button.title = "Click to turn ON";
+            //empty list
+            wifi_list = document.getElementById("ssid_list");
+            wifi_list.innerHTML = "";
           }
         }
       };
