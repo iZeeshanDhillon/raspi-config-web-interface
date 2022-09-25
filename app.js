@@ -42,7 +42,7 @@ app.post('/static_ip', (req, res) => {
     });
     //Restart wifi interface
     var exec = require('child_process').exec;
-    exec('sudo ifconfig wlan0 down && sudo ifconfig wlan0 up', function (error, stdout, stderr) {
+    exec('sudo ifconfig wlan0 down && sudo ifconfig wlan0 up && sudo ip link set wlan0 up', function (error, stdout, stderr) {
         if (error) {
             res.status(200).send('Could not restart wifi interface. Try rebooting the device.')
         }
