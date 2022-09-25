@@ -1,0 +1,457 @@
+<!Doctype html>
+<html>
+<style>
+.btn-group button {
+  background-color: #04AA6D; /* Green background */
+  border: 1px solid green; /* Green border */
+  color: white; /* White text */
+  padding: 10px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  float: left; /* Float the buttons side by side */
+}
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.btn-group button:not(:last-child) {
+  border-right: none; /* Prevent double borders */
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+  background-color: #3e8e41;
+}
+</style>
+<style>
+    body {font-family: Arial, Helvetica, sans-serif;}
+    
+    /* The Modal (background) */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      padding-top: 100px; /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+    
+    /* Modal Content */
+    .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 50%;
+    }
+    
+    /* The Close Button */
+    .close {
+      color: #aaaaaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    
+    .close:hover,
+    .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .myButton {
+        box-shadow:inset 0px 0px 0px 0px #9acc85;
+        background:linear-gradient(to bottom, #74ad5a 5%, #68a54b 100%);
+        background-color:#74ad5a;
+        border-radius:9px;
+        border:1px solid #3b6e22;
+        display:inline-block;
+        cursor:pointer;
+        color:#ffffff;
+        font-family:Arial;
+        font-size:16px;
+        font-weight:bold;
+        padding:9px 23px;
+        text-decoration:none;
+    }
+    .myButton:hover {
+        background:linear-gradient(to bottom, #68a54b 5%, #74ad5a 100%);
+        background-color:#68a54b;
+    }
+    .myButton:active {
+        position:relative;
+        top:1px;
+    }
+    </style>
+
+    <script>
+      function set_static_ip() {
+        form = document.getElementById("static_ip_form");
+        //make a post request to the server and get response
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            //document.getElementById("demo").innerHTML = this.responseText;
+            alert(this.responseText);
+            //close the modal id="static_ip_modal"
+            var modal = document.getElementById("static_ip_modal");
+            modal.style.display = "none";
+            //clear the form
+            form.reset();
+          }
+        };
+        xhttp.open("POST", "static_ip", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("ip=" + form.ip.value + "&mask=" + form.subnet.value + "&gateway=" + form.gateway.value + "&dns=" + form.dns.value + "&dns2=" + form.dns2.value);
+      }
+
+      function set_username_password() {
+        form = document.getElementById("username_password_form");
+        //make a post request to the server and get response
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            //document.getElementById("demo").innerHTML = this.responseText;
+            alert(this.responseText);
+            //close the modal id="static_ip_modal"
+            var modal = document.getElementById("username_password_modal");
+            modal.style.display = "none";
+            //clear the form
+            form.reset();
+          }
+        };
+        xhttp.open("POST", "set_username_password", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("username=" + form.username.value + "&password=" + form.password.value);
+      }
+    </script>
+<body>
+
+
+<!-- Static IP modal -->
+<div id="static_ip_modal" class="modal">
+
+    <div class="modal-content">
+        <span class="close1">&times;</span><br><br>
+        <form id="static_ip_form" action="/static_ip" method="post">
+            <div style="width: 100%; height: 100%;">
+                <!-- make a table with three rows and two columns -->
+                <table style="width: 100%; height: 100%;">
+                    <tr>
+                        <td style="width: 50%; height: 100%; text-align: right;">
+                            <label for="subnet">IP Address</label>
+                            <input type="text" id="ip" name="ip" placeholder="192.168.1.100">
+                        </td>
+                        <td style="width: 50%; height: 100%; text-align: right;">
+                            <label for="subnet">Subnet Mask</label>
+                            <input type="text" id="subnet" name="subnet" placeholder="255.255.255.0">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%; height: 100%; text-align: right;">
+                            <label for="gateway">Gateway</label>
+                            <input type="text" id="gateway" name="gateway" placeholder="192.168.1.1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%; height: 100%; text-align: right;">
+                            <label for="dns">Primary DNS</label>
+                            <input type="text" id="dns" name="dns" placeholder="8.8.8.8">
+                        </td>
+                        <td style="width: 50%; height: 100%; text-align: right;">
+                            <label for="dns2">Secondary DNS</label>
+                            <input type="text" id="dns2" name="dns2" placeholder="8.8.4.4">
+                        </td>
+                    </tr>
+                </table><br><br>
+                <!-- make a button on bottom-right corner -->
+                <a href="#" class="myButton" onclick="set_static_ip()">Save</a>
+            </div>
+
+        </form>
+
+    </div>
+  
+</div>
+
+<!-- Username password modal -->
+<div id="username_password_modal" class="modal">
+
+    <div class="modal-content">
+        <span class="close2">&times;</span><br><br>
+        <form id="username_password_form" class="modal-content animate" method="post">
+            <div class="container">
+                <label for="uname"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" id="username" name="username" required style="padding: 14px 20px; margin: 8px 0; cursor: pointer; width: 100%;">
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" id="password" name="password" required style="padding: 14px 20px; margin: 8px 0; cursor: pointer; width: 100%;">
+            </div>
+            <a href="#" class="myButton" onclick="set_username_password()">Save</a>
+        </form>
+    </div>
+  
+</div>
+
+
+<!-- Wifi settings modal -->
+<div id="wifi_modal" class="modal">
+    <script>
+      function toggle_wifi(){
+        button = document.getElementById("wifi_toggle_button");
+        if (button.innerHTML == "WiFi ON"){
+          //send post request to /wifi_toggle with status=OFF
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              if (this.responseText == "OFF"){
+                
+                button.innerHTML = "WiFi OFF";
+                button.style.backgroundColor = "red";
+                button.title = "Click to turn WiFi ON";
+              }
+            }
+          };
+          xhttp.open("POST", "wifi_toggle", true);
+          xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          xhttp.send("state=OFF");
+        }
+        else{
+          //send post request to /wifi_toggle with status=ON
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              if (this.responseText == "ON"){
+                
+                button.innerHTML = "WiFi ON";
+                button.style.backgroundColor = "green";
+                button.title = "Click to turn WiFi OFF";
+                update_wifi_list();
+              }
+            }
+          };
+          xhttp.open("POST", "wifi_toggle", true);
+          xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          xhttp.send("state=ON");
+        }
+      }
+    </script>
+    <div class="modal-content" style="position: relative;">
+        <span class="close3">&times;</span><br><br>
+        <button id="wifi_toggle_button" style="position: absolute; top: 0; right: 0; margin: 10px; width: 100px; height: 30px; background-color: red; border: 0px;" title="Click to turn ON" onclick="toggle_wifi()">WiFi OFF</button>
+        <!-- create a scrollable div in the center of the modal -->
+        <a href="#" onclick="update_wifi_list()">Refresh</a>
+        <div style="overflow-y: scroll; height:150px; border: #000000 solid 1px;">
+            <img id="loading_gif" style="display: none; position: absolute; left: 50%; top: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);" alt="" src="data:image/gif;base64,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" />
+            <!-- list scanned wifi networks -->
+            <ul class="list-group" id="ssid_list">
+                
+            </ul>
+        </div>
+    </div>
+    <script>
+      function update_wifi_list(){
+          
+          console.log("updating wifi list");
+          loading_img = document.getElementById("loading_gif");
+          loading_img.style.display = "block";
+          //get /wifi_scan to get the list of wifi networks
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              //document.getElementById("demo").innerHTML = this.responseText;
+              loading_img.style.display = "none";
+              wifi_list = document.getElementById("ssid_list");
+              // if response containsd ""WiFi interface is busy""
+              if(this.responseText.includes("WiFi interface is busy")){
+                //display error message
+                wifi_list.innerHTML = "<span style='color:red'>" + this.responseText + "</span>";
+              }
+              else {
+                ssids = this.responseText.split(":");
+                //empty list
+                wifi_list.innerHTML = "";
+
+                for (i = 0; i < ssids.length; i++) {
+                  var li = document.createElement("li");
+                  //set innerHTML to ssid
+                  li.innerHTML = ssids[i] + " <a href='#' onclick='select_ssid(\"" + ssids[i] + "\")'>Connect</a>";
+    
+                  wifi_list.appendChild(li);
+                }
+            }
+            }
+          };
+          xhttp.open("GET", "/wifi_scan", true);
+          xhttp.send();
+        }
+    </script>
+    <script>
+      button = document.getElementById("wifi_toggle_button");
+      //sends get request to /wifi_status to get the current status of wifi
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          //document.getElementById("demo").innerHTML = this.responseText;
+          if (this.responseText == "ON") {
+            button.style.backgroundColor = "green";
+            button.innerHTML = "WiFi ON";
+            button.title = "Click to turn OFF";
+          }
+          else {
+            button.style.backgroundColor = "red";
+            button.innerHTML = "WiFi OFF";
+            button.title = "Click to turn ON";
+          }
+        }
+      };
+      xhttp.open("GET", "/wifi_status", true);
+      xhttp.send();
+
+      function select_ssid(ssid){
+        var password = prompt("Enter password for " + ssid);
+        //make post request to /wifi_connect with ssid and password
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            //document.getElementById("demo").innerHTML = this.responseText;
+            alert(this.responseText);
+            modal = document.getElementById("wifi_modal");
+            modal.style.display = "none";
+          }
+        };
+        xhttp.open("POST", "/wifi_connect", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("ssid=" + ssid + "&password=" + password);
+
+      }
+
+    </script> 
+</div>
+<!-- File modal -->
+<div id="file_modal" class="modal">
+
+    <div class="modal-content">
+      <span class="close4">&times;</span>
+      <p>File open modal</p>
+    </div>
+  
+</div>
+
+<div class="btn-group" style="width:100%">
+    <h1 style="margin: 0; position: absolute; left: 50%; top: 5%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);">Raspberry Pi settings</h1>
+</div>
+
+<div class="btn-group" style="width:100%">
+    <!-- make a button and center it horizontally -->
+    <button id="static_ip_button" onclick="open_static_ip_modal()" style="width:50%; margin: 0; position: absolute; left: 50%; top: 15%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);">
+        Setup static IP
+    </button>
+</div>
+<br>
+<div class="btn-group" style="width:100%">
+    <!-- make a button and center it horizontally -->
+    <button id="username_password_button" style="width:50%; margin: 0; position: absolute; left: 50%; top: 20%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);">
+        Change Username & Password
+    </button>
+</div>
+<br>
+<div class="btn-group" style="width:100%">
+    <!-- make a button and center it horizontally -->
+    <button id="wifi_button" style="width:50%; margin: 0; position: absolute; left: 50%; top: 25%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);">
+        WiFi Settings
+    </button>
+</div>
+<br>
+<div class="btn-group" style="width:100%">
+    <!-- make a button and center it horizontally -->
+    <button id="file_button" style="width:50%; margin: 0; position: absolute; left: 50%; top: 30%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);">
+        Videos 
+    </button>
+</div>
+<br>
+
+<script>
+    static_ip_button = document.getElementById("static_ip_button");
+    username_password_button = document.getElementById("username_password_button");
+    wifi_button = document.getElementById("wifi_button");
+    file_button = document.getElementById("file_button");
+    // Get the modal
+    static_ip_modal = document.getElementById("static_ip_modal");
+    username_password_modal = document.getElementById("username_password_modal");
+    wifi_modal = document.getElementById("wifi_modal");
+    file_modal = document.getElementById("file_modal");
+    // Get the <span> element that closes the modal
+    span1 = document.getElementsByClassName("close1")[0];
+    span2 = document.getElementsByClassName("close2")[0];
+    span3 = document.getElementsByClassName("close3")[0];
+    span4 = document.getElementsByClassName("close4")[0];
+    // When the user clicks on the button, open the modal
+    static_ip_button.onclick = function() {
+      static_ip_modal.style.display = "block";
+    }
+    username_password_button.onclick = function() {
+      username_password_modal.style.display = "block";
+    }
+    wifi_button.onclick = function() {
+      wifi_modal.style.display = "block";
+      update_wifi_list();
+    }
+    file_button.onclick = function() {
+      debugger;
+      //send post request to open_folder
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          if (this.responseText != 'done') {
+            alert(this.responseText);
+          }
+          else {
+            file_modal.style.display = "block";
+          }
+        }
+      };
+      xhttp.open("POST", "/open_folder", true);
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhttp.send();
+    }
+    // When the user clicks on <span> (x), close the modal
+    span1.onclick = function() {
+      static_ip_modal.style.display = "none";
+    }
+    span2.onclick = function() {
+      username_password_modal.style.display = "none";
+    }
+    span3.onclick = function() {
+      wifi_modal.style.display = "none";
+    }
+    span4.onclick = function() {
+      file_modal.style.display = "none";
+    }
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == static_ip_modal) {
+        static_ip_modal.style.display = "none";
+      }
+      if (event.target == username_password_modal) {
+        username_password_modal.style.display = "none";
+      }
+      if (event.target == wifi_modal) {
+        wifi_modal.style.display = "none";
+      }
+      if (event.target == file_modal) {
+        file_modal.style.display = "none";
+      }
+    }
+</script>
+
+</body>
+</html>
