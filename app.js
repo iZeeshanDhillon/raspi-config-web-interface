@@ -228,6 +228,10 @@ app.post('/open_folder', (req, res) => {
     });
 })
 
+app.post('/use_dhcp', (req, res) => {
+    res.status(200).send('Using DHCP')
+})
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
