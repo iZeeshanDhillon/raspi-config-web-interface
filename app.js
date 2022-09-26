@@ -229,7 +229,14 @@ app.post('/open_folder', (req, res) => {
 })
 
 app.post('/use_dhcp', (req, res) => {
-    res.status(200).send('Using DHCP')
+    cmd = "sed -i '/interface wlan0/d' /etc/dhcpcd.conf && sed -i '/static /d' /etc/dhcpcd.conf && ifconfig wlan0 down && ifconfig wlan0 up && sudo ip link set wlan0 up"
+    var exec = require('child_process').exec;
+    exec(cmd, function (error, stdout, stderr) {
+        if (error) {
+            res.status(200).send('Could not use DHCP. Please check if it exists. Or run the app as root user.')
+        }
+        res.status(200).send('done')
+    });
 })
 
 app.listen(port, () => {
