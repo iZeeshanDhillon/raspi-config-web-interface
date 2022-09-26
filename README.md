@@ -1,5 +1,7 @@
 # raspi-config-web-interface
 
+This app is developed to be used on Raspberry Pi for controlling basic settings from the browser like connecting to some WiFi network, setting up static IP address, changing username/password etc.
+
 ### Run these commands to install dependencies  
 
 ```
