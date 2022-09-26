@@ -27,7 +27,7 @@ node app.js
 OR
 ```
 /opt/nodejs/bin/node app.js
-``
+```
 
 Here is the screenshot of the UI
 ![][image_ref_a32ff4ads]
