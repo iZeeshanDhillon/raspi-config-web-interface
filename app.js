@@ -199,6 +199,7 @@ app.post('/wifi_connect', (req, res) => {
 })
 
 app.get('/set_username_password', (req, res) => {
+    var existing_user = req.query.existing_user
     var username = req.body.username;
     var password = req.body.password;
     var current_username = 'zeeshan'
