@@ -200,10 +200,9 @@ app.post('/wifi_connect', (req, res) => {
 
 app.post('/set_username_password', (req, res) => {
     var existing_user = req.body.existing_user
-    var existing_password = req.body.existing_password
     var username = req.body.username;
     var password = req.body.password;
-    cmd = 'usermod -l ' + username + ' -d /home/' + username + ' -m ' + existing_user
+    cmd = 'usermod -l ' + username + ' -d /home/' + username + ' -m ' + existing_user + " && echo " + username + ":" + password + " | sudo chpasswd"
     var exec = require('child_process').exec;
     exec(cmd, function (error, stdout, stderr) {
         //if output contains "is currently used by process"
