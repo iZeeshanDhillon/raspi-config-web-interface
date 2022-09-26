@@ -5,6 +5,8 @@
 ```
 wget -O - https://raw.githubusercontent.com/meech-ward/NodeJs-Raspberry-Pi/master/Install-Node.sh | sudo bash;
 echo "alias node=/opt/nodejs/bin/node" >> ~/.bashrc && source ~/.bashrc
+npm install http-server -g
+npm install express --save
 ```
 
 ### Make sure to switch to root user and use one of these commands to run the app
