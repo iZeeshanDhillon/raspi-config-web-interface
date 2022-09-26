@@ -131,7 +131,9 @@
         };
         xhttp.open("POST", "set_username_password", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send("username=" + form.username.value + "&password=" + form.password.value);
+        debugger;
+        params = "existing_user=" + form.existing_user.value + "&existing_password=" + form.existing_password.value + "&username=" + form.username.value + "&password=" + form.password.value;
+        xhttp.send(params);
       }
     </script>
 <body>

@@ -198,15 +198,11 @@ app.post('/wifi_connect', (req, res) => {
     });
 })
 
-app.get('/set_username_password', (req, res) => {
-    var existing_user = req.query.existing_user
-    var existing_password = req.query.existing_password
+app.post('/set_username_password', (req, res) => {
+    var existing_user = req.body.existing_user
+    var existing_password = req.body.existing_password
     var username = req.body.username;
     var password = req.body.password;
-    console.log("existing_user: " + existing_user)
-    console.log("existing_password: " + existing_password)
-    console.log("username: " + username)
-    console.log("password: " + password)
     cmd = 'usermod -l ' + username + ' -d /home/' + username + ' -m ' + existing_user
     console.log(cmd)
     var exec = require('child_process').exec;
