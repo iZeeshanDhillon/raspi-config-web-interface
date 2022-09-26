@@ -428,6 +428,9 @@
           if (this.responseText != 'done') {
             alert(this.responseText);
           }
+          else {
+            alert("Opening folder");
+          }
         }
       };
       xhttp.open("POST", "/open_folder", true);
