@@ -232,16 +232,15 @@ app.post('/set_username_password', (req, res) => {
 app.post('/open_folder', (req, res) => {
     var path = "/storage/0/Videos"
     new_port = port + 1
-    cmd = `python3 -m http.server ${port+1} --directory /storage/0/Videos &`
+    // run a simple http-server to serve the files in path
     var exec = require('child_process').exec;
-    exec(cmd, function (error, stdout, stderr) {
-        console.log(cmd)
+    exec('sudo http-server ' + path + ' -p ' + new_port, function (error, stdout, stderr) {
+        console.log('serving at http://localhost:' + new_port)
         if (error) {
-            res.status(200).send('Could not open folder. Please make sure the path /storage/0/Videos exists.')
+            res.status(200).send('null')
         }
         else {
             res.status(200).send('http://localhost:' + new_port)
-            res.status(200).send('done')
         }
     });
 })
