@@ -205,14 +205,16 @@ app.post('/set_username_password', (req, res) => {
     var password = req.body.password;
     cmd = 'usermod -l ' + username + ' -d /home/' + username + ' -m ' + existing_user
     var exec = require('child_process').exec;
-    //add cmd to the /etc.rc.local file
-    var cmd2 = "sed -i '/exit 0/i " + cmd + "' /etc/rc.local"
-    exec(cmd2, function (error, stdout, stderr) {
-        if (error) {
-            res.status(200).send('Error occured while changing username.')
+    exec(cmd, function (error, stdout, stderr) {
+        //if output contains "is currently used by process"
+        if (stdout.includes("is currently used by process")) {
+            res.status(200).send('User is currently logged in. Please logout or reboot and try again.')
+        }
+        if (stdout.includes("does not exist")) {
+            res.status(200).send('User does not exist.')
         }
         else {
-            res.status(200).send('Please reboot the device to apply changes.')
+            res.status(200).send('Username and password updated.')
         }
     });
 })
