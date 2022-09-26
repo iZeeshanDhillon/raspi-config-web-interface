@@ -240,8 +240,7 @@ app.post('/open_folder', (req, res) => {
             res.status(200).send('Could not open folder. Please make sure the path /storage/0/Videos exists.')
         }
         else {
-            local_ip = getLocalIP()
-            res.status(200).send('http://' + local_ip + ':' + new_port)
+            res.status(200).send('http://localhost:' + new_port)
             res.status(200).send('done')
         }
     });
