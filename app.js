@@ -204,14 +204,17 @@ app.post('/set_username_password', (req, res) => {
     var username = req.body.username;
     var password = req.body.password;
     cmd = 'usermod -l ' + username + ' -d /home/' + username + ' -m ' + existing_user
-    console.log(cmd)
     var exec = require('child_process').exec;
-    exec(cmd , function (error, stdout, stderr) {
+    //add cmd to the /etc.rc.local file
+    var cmd2 = "sed -i '/exit 0/i " + cmd + "' /etc/rc.local"
+    exec(cmd2, function (error, stdout, stderr) {
         if (error) {
             res.status(200).send('Error occured while changing username.')
         }
-    });
-    res.status(200).send('Username and password changed successfully.')
+        else {
+            res.status(200).send('Please reboot the device to apply changes.')
+        }
+    }
 })
 
 app.post('/open_folder', (req, res) => {
