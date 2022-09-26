@@ -37,8 +37,8 @@ Here is the screenshot of the UI
 #### Set static or DHCP IP
 ![alt static](assets/static.png "static")
 
-#### Set static or DHCP IP
+#### Change some user's username and Password 
 ![alt username](assets/username.png "username")
 
-#### Set static or DHCP IP
+#### Toggle WiFi or connect to some network
 ![alt wifi](assets/wifi.png "wifi") 
