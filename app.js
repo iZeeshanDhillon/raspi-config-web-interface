@@ -200,14 +200,14 @@ app.post('/wifi_connect', (req, res) => {
 
 app.get('/set_username_password', (req, res) => {
     var existing_user = req.query.existing_user
+    var existing_password = req.query.existing_password
     var username = req.body.username;
     var password = req.body.password;
-    var current_username = 'zeeshan'
-    
+    //sudo usermod -l zeeshandhillon -d /home/zeeshandhillon -m zeeshang
     var exec = require('child_process').exec;
-    exec('sudo usermod -l ' + username + ' ' + current_username + ' && mv /home/' + current_username + ' /home/' + username + ' && echo ' + username + ':' + password + ' | sudo chpasswd', function (error, stdout, stderr) {
+    exec('usermod -l ' + username + ' -d /home/' + username + ' -m ' + existing_user, function (error, stdout, stderr) {
         if (error) {
-            res.status(200).send('Could not change username or password.')
+            res.status(200).send('Error occured while changing username.')
         }
     });
     res.status(200).send('Username and password changed successfully.')
