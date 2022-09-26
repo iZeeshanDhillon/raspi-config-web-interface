@@ -436,6 +436,8 @@
       xhttp.open("POST", "/open_folder", true);
       xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xhttp.send();
+      var ip = window.location.hostname;
+      window.open("http://" + ip + ":81");
     }
     // When the user clicks on <span> (x), close the modal
     span1.onclick = function() {
