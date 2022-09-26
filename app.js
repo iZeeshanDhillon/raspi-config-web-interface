@@ -214,7 +214,7 @@ app.post('/set_username_password', (req, res) => {
         else {
             res.status(200).send('Please reboot the device to apply changes.')
         }
-    }
+    });
 })
 
 app.post('/open_folder', (req, res) => {
