@@ -31,7 +31,7 @@ OR
 
 Here is the screenshot of the UI
 
-#### Home
+#### Home Page
 ![alt home](assets/img.png "Home")
 
 #### Set static or DHCP IP
