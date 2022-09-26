@@ -420,24 +420,35 @@
       update_wifi_list();
     }
     file_button.onclick = function() {
-      debugger;
-      //send post request to open_folder
+      var address = "http://" + window.location.hostname + ":81"
+      //check if address is valid
       var xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-          if (this.responseText != 'done') {
-            alert(this.responseText);
+          //document.getElementById("demo").innerHTML = this.responseText;
+          if (this.responseText == "OK") {
+            window.open(address, '_blank');
           }
           else {
-            alert("Opening folder");
+            //send post request to open_folder
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+              if (this.readyState == 4 && this.status == 200) {
+                if (this.responseText != 'done') {
+                  alert(this.responseText);
+                }
+                else {
+                  alert("Opening folder");
+                }
+              }
+            };
+            xhttp.open("POST", "/open_folder", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send();
+            window.open(address);
           }
         }
       };
-      xhttp.open("POST", "/open_folder", true);
-      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      xhttp.send();
-      var ip = window.location.hostname;
-      window.open("http://" + ip + ":81");
     }
     // When the user clicks on <span> (x), close the modal
     span1.onclick = function() {
