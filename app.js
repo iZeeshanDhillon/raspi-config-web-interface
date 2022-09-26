@@ -48,8 +48,19 @@ app.post('/static_ip', (req, res) => {
         }
     });
     //send "done" in response with https status code 200
-    res.status(200).send('Static IP set successfully.')
+    res.status(200).send('Static IP set successfully. Please wait a few seconds for changes to take effect.')
 
+})
+
+app.post('/use_dhcp', (req, res) => {
+    cmd = "sed -i '/interface wlan0/d' /etc/dhcpcd.conf && sed -i '/static /d' /etc/dhcpcd.conf && ifconfig wlan0 down && ifconfig wlan0 up && sudo ip link set wlan0 up"
+    var exec = require('child_process').exec;
+    exec(cmd, function (error, stdout, stderr) {
+        if (error) {
+            res.status(200).send('Could not use DHCP. Please check if it exists. Or run the app as root user.')
+        }
+        res.status(200).send('Using DHCP. Please wait a few seconds for changes to take effect.')
+    });
 })
 
 app.get('/wifi_status', (req, res) => {
@@ -219,25 +230,21 @@ app.post('/set_username_password', (req, res) => {
 })
 
 app.post('/open_folder', (req, res) => {
-    var exec = require('child_process').exec;
-    exec('pcmanfm /storage/0/videos', function (error, stdout, stderr) {
-        if (error) {
-            res.status(200).send('Could not open folder. Please check if it exists. Or run the app as root user.')
-        }
-        res.status(200).send('done')
-    });
-})
-
-app.post('/use_dhcp', (req, res) => {
-    cmd = "sed -i '/interface wlan0/d' /etc/dhcpcd.conf && sed -i '/static /d' /etc/dhcpcd.conf && ifconfig wlan0 down && ifconfig wlan0 up && sudo ip link set wlan0 up"
+    var path = "/storage/0/Videos"
+    new_port = port + 1
+    cmd = `python3 -m http.server ${port+1} --directory /storage/0/Videos`
+    consonsole.log(cmd)
     var exec = require('child_process').exec;
     exec(cmd, function (error, stdout, stderr) {
         if (error) {
-            res.status(200).send('Could not use DHCP. Please check if it exists. Or run the app as root user.')
+            res.status(200).send('Could not open folder. Please make sure the path /storage/0/Videos exists.')
         }
-        res.status(200).send('done')
+        else {
+            res.status(200).send('done')
+        }
     });
 })
+
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
