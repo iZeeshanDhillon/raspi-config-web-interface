@@ -421,34 +421,22 @@
     }
     file_button.onclick = function() {
       var address = "http://" + window.location.hostname + ":81"
-      //check if address is valid
+      //send post request to open_folder
       var xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-          //document.getElementById("demo").innerHTML = this.responseText;
-          if (this.responseText == "OK") {
-            window.open(address, '_blank');
+          if (this.responseText != 'done') {
+            alert(this.responseText);
           }
           else {
-            //send post request to open_folder
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-              if (this.readyState == 4 && this.status == 200) {
-                if (this.responseText != 'done') {
-                  alert(this.responseText);
-                }
-                else {
-                  alert("Opening folder");
-                }
-              }
-            };
-            xhttp.open("POST", "/open_folder", true);
-            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhttp.send();
-            window.open(address);
+            alert("Opening folder");
           }
         }
       };
+      xhttp.open("POST", "/open_folder", true);
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhttp.send();
+      window.open(address);
     }
     // When the user clicks on <span> (x), close the modal
     span1.onclick = function() {
