@@ -203,9 +203,14 @@ app.get('/set_username_password', (req, res) => {
     var existing_password = req.query.existing_password
     var username = req.body.username;
     var password = req.body.password;
-    //sudo usermod -l zeeshandhillon -d /home/zeeshandhillon -m zeeshang
+    console.log("existing_user: " + existing_user)
+    console.log("existing_password: " + existing_password)
+    console.log("username: " + username)
+    console.log("password: " + password)
+    cmd = 'usermod -l ' + username + ' -d /home/' + username + ' -m ' + existing_user
+    console.log(cmd)
     var exec = require('child_process').exec;
-    exec('usermod -l ' + username + ' -d /home/' + username + ' -m ' + existing_user, function (error, stdout, stderr) {
+    exec(cmd , function (error, stdout, stderr) {
         if (error) {
             res.status(200).send('Error occured while changing username.')
         }
