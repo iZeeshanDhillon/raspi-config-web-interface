@@ -30,4 +30,15 @@ OR
 ```
 
 Here is the screenshot of the UI
-![alt text](assets/img.png "Title")
+
+#### Home
+![alt home](assets/img.png "Home")
+
+#### Set static or DHCP IP
+![alt static](assets/static.png "static")
+
+#### Set static or DHCP IP
+![alt username](assets/username.png "username")
+
+#### Set static or DHCP IP
+![alt wifi](assets/wifi.png "wifi") 
