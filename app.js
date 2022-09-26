@@ -206,10 +206,10 @@ app.post('/set_username_password', (req, res) => {
     var exec = require('child_process').exec;
     exec(cmd, function (error, stdout, stderr) {
         //if output contains "is currently used by process"
-        if (stdout.includes("is currently used by process") || stderr.includes("is currently used by process")) {
+        if (error || stdout.includes("is currently used by process") || stderr.includes("is currently used by process")) {
             res.status(200).send('User is currently logged in. Please logout or reboot and try again.')
         }
-        if (stdout.includes("does not exist") || stderr.includes("does not exist")) {
+        if (error || stdout.includes("does not exist") || stderr.includes("does not exist")) {
             res.status(200).send('User does not exist.')
         }
         else {
