@@ -233,7 +233,7 @@ app.post('/open_folder', (req, res) => {
     var path = "/storage/0/Videos"
     new_port = port + 1
     cmd = `python3 -m http.server ${port+1} --directory /storage/0/Videos &`
-    //console.log(cmd)
+    console.log(cmd)
     var exec = require('child_process').exec;
     exec(cmd, function (error, stdout, stderr) {
         if (error) {
