@@ -196,9 +196,25 @@
                 <!-- make a button on bottom-right corner -->
                 <a href="#" class="myButton" onclick="set_static_ip()">Save</a>
                 <a href="#" class="myButton" onclick="user_dhcp()">Use DHCP</a>
+                <span>Using static IP</span>
             </div>
-
         </form>
+
+        <script>
+            var ip = document.getElementById("ip");
+            var subnet = document.getElementById("subnet");
+            var gateway = document.getElementById("gateway");
+            var dns = document.getElementById("dns");
+            var dns2 = document.getElementById("dns2");
+            //make a get request to the server and get response
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+              if (this.readyState == 4 && this.status == 200) {
+                
+            };
+            xhttp.open("GET", "network_status", true);
+            xhttp.send();
+        </script>
 
     </div>
   
