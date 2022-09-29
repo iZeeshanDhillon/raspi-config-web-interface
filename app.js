@@ -64,34 +64,14 @@ app.post('/use_dhcp', (req, res) => {
 })
 
 app.get('/wifi_status', (req, res) => {
-    //Check if file ".wifi" exists
-    fs = require('fs')
-    fs.exists('.wifi', function (exists) {
-        if (exists) {
-            //Read file
-            fs.readFile('.wifi', 'utf8', function (err, data) {
-                if (err) {
-                    res.status(200).send('Error occured while reading file.')
-                }
-                else {
-                    res.status(200).send(data)
-                }
-            });
-        } else {
-            //Write to file ".wifi"
-            fs.writeFile('.wifi', 'ON', function (err) {
-                if (err) {
-                    res.status(200).send('null')
-                }
-            });
-            exec('sudo ifconfig wlan0 up', function (error, stdout, stderr) {
-                if (error) {
-                    res.status(200).send('null')
-                }
-            });
+    var exec = require('child_process').exec;
+    exec("ifconfig | grep 'wlan0' | awk '{print $1}'", function (error, stdout, stderr) {
+        if (stdout+stderr.includes('wlan0')) {
             res.status(200).send('ON')
+        } else {
+            res.status(200).send('OFF')
         }
-    }); 
+    });
 })
 
 app.post('/wifi_toggle', (req, res) => {
