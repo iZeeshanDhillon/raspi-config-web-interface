@@ -237,7 +237,9 @@
           xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
               if (this.responseText == "OFF"){
-                
+                wifi_list = document.getElementById("ssid_list");
+                //set innerHTML of wifi_list to "WiFi is OFF"
+                wifi_list.innerHTML = "WiFi is OFF";
                 button.innerHTML = "WiFi OFF";
                 button.style.backgroundColor = "red";
                 button.title = "Click to turn WiFi ON";
