@@ -297,11 +297,7 @@
           //get /wifi_scan to get the list of wifi networks
           var xhttp = new XMLHttpRequest();
           xhttp.onreadystatechange = function() {
-            if (this.status == 503){
-              update_wifi_list();
-              return;
-            }
-            else if (this.status == 200) {
+            if (this.status == 200 || this.status == 503) {
               //document.getElementById("demo").innerHTML = this.responseText;
               loading_img.style.display = "none";
               wifi_list = document.getElementById("ssid_list");
