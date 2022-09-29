@@ -299,7 +299,7 @@
             wifi_power_status = response_json["wifi_power_status"];
             connected_to = response_json["connected_to"];
             //document.getElementById("demo").innerHTML = this.responseText;
-            if (this.responseText.includes("ON:")) {
+            if (wifi_power_status == "ON") {
               button.style.backgroundColor = "green";
               button.innerHTML = "WiFi ON";
               button.title = "Click to turn OFF";
