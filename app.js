@@ -144,14 +144,14 @@ app.get('/wifi_scan', (req, res) => {
     exec('sudo iwlist wlan0 scan|grep SSID > scan.txt', function (error, stdout, stderr) {
         if (error) {
             console.log('stderr: ' + stderr);
-            res.status(503).send('WiFi interface is busy. Please refresh in few a seconds.')
+            res.status(503).send('WiFi interface is busy. Please refresh in a few seconds.')
         }
         else {
             fs = require('fs')
             fs.readFile('scan.txt', 'utf8', function (err, data) {
                 if (err) {
                     console.log('Error: ' + err);
-                    res.status(503).send('WiFi interface is busy. Please refresh in few a seconds.')
+                    res.status(503).send('WiFi interface is busy. Please refresh in a few seconds.')
                 }
                 else {
                         var lines = data.split('\n')
