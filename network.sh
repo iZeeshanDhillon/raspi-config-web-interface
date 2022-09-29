@@ -1,3 +1,4 @@
+#! /usr/bin/bash
 ip_address=""
 router=""
 dns1=""
