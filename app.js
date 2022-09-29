@@ -71,15 +71,18 @@ app.get('/wifi_status', (req, res) => {
             //get SSID if connected
             exec("iwgetid -r", function (error, stdout, stderr) {
                 if ((stdout+stderr) == '') {
-                    res.status(200).send('ON:null')
+                    var wifi_power_status = "ON"
+                    var connected_to = "Not connected"
                 }
                 else {
-                    res.status(200).send('ON:' + stdout)
+                    var wifi_power_status = "ON"
+                    var connected_to = stdout
                 }
+                res.status(200).send({wifi_power_status: wifi_power_status, connected_to: connected_to})
             });
         }
         else {
-            res.status(200).send('OFF')
+            res.status(200).send({wifi_power_status: "OFF", connected_to: "Not connected"})
         }
     });
 })
