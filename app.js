@@ -89,7 +89,7 @@ app.post('/wifi_toggle', (req, res) => {
         });
         var flag = 0
         while (true){
-            console.log('waiting for wifi to turn on' + flag)
+            //console.log('waiting for wifi to turn on' + flag)
             exec("ifconfig | grep 'wlan0' | awk '{print $1}'", function (error, stdout, stderr) {
                 console.log('stdout: ' + stdout)
                 console.log('stderr: ' + stderr)
@@ -112,7 +112,7 @@ app.post('/wifi_toggle', (req, res) => {
         });
         var flag = 0
         while (true){
-            console.log('waiting for wifi to turn off:' + flag)
+            //console.log('waiting for wifi to turn off:' + flag)
             exec("ifconfig | grep 'wlan0' | awk '{print $1}'", function (error, stdout, stderr) {
                 console.log('stdout: ' + stdout)
                 console.log('stderr: ' + stderr)
