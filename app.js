@@ -63,6 +63,11 @@ app.get('/network_status', (req, res) => {
         var gateway = stdout.split(';')[2]
         var dns = stdout.split(';')[3]
         var dns2 = stdout.split(';')[4]
+        console.log(ip_address)
+        console.log(subnet)
+        console.log(gateway)
+        console.log(dns)
+        console.log(dns2)
         res.status(200).send({ ip_address: ip_address, subnet: subnet, gateway: gateway, dns: dns, dns2: dns2 })
     });
 })
