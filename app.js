@@ -156,22 +156,14 @@ app.get('/wifi_scan', (req, res) => {
     exec('sudo iwlist wlan0 scan|grep SSID > scan.txt', function (error, stdout, stderr) {
         if (error) {
             console.log('stderr: ' + stderr);
-            exec('iwgetid -r', function (error, stdout, stderr) {
-                //remove last character from SSID
-                ssid = stdout.slice(0, -1)
-                res.status(200).send({networks: 'WiFi interface is busy. Please refresh in a few seconds.', connected_to: ssid})
-            });
+            res.status(200).send({networks: 'WiFi interface is busy. Please refresh in a few seconds.'})
         }
         else {
             fs = require('fs')
             fs.readFile('scan.txt', 'utf8', function (err, data) {
                 if (err) {
                     console.log('Error: ' + err);
-                    exec('iwgetid -r', function (error, stdout, stderr) {
-                        //remove last character from SSID
-                        ssid = stdout.slice(0, -1)
-                        res.status(200).send({networks: 'WiFi interface is busy. Please refresh in a few seconds.', connected_to: ssid})
-                    });
+                    res.status(200).send({networks: 'WiFi interface is busy. Please refresh in a few seconds.'})
                 }
                 else {
                         var lines = data.split('\n')
@@ -189,11 +181,7 @@ app.get('/wifi_scan', (req, res) => {
                             networks_string += networks[i] + ":"
                         }
                         networks_string = networks_string.slice(0, -1)
-                        exec('iwgetid -r', function (error, stdout, stderr) {
-                            //remove last character from SSID
-                            ssid = stdout.slice(0, -1)
-                            res.status(200).send({networks: networks_string, connected_to: ssid})
-                        });
+                        res.status(200).send({networks: networks_string})
                 }
             });
         }
