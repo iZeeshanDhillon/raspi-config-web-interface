@@ -143,12 +143,14 @@ app.get('/wifi_scan', (req, res) => {
     var exec = require('child_process').exec;
     exec('sudo iwlist wlan0 scan|grep SSID > scan.txt', function (error, stdout, stderr) {
         if (error) {
+            console.log('stderr: ' + stderr);
             res.status(200).send('WiFi interface is busy. Please refresh in few a seconds.')
         }
         else {
             fs = require('fs')
             fs.readFile('scan.txt', 'utf8', function (err, data) {
                 if (err) {
+                    console.log('Error: ' + err);
                     res.status(200).send('WiFi interface is busy. Please refresh in few a seconds.')
                 }
                 else {
