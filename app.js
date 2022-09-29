@@ -87,7 +87,8 @@ app.post('/wifi_toggle', (req, res) => {
                 res.status(200).send("Couldn't turn on wifi. Please make sure the app is tunning as root user or reboot the device if the problem persists.")
             }
         });
-        var flag = 0
+        res.status(200).send('ON')
+        /*var flag = 0
         while (true){
             //console.log('waiting for wifi to turn on' + flag)
             exec("ifconfig | grep 'wlan0' | awk '{print $1}'", function (error, stdout, stderr) {
@@ -102,7 +103,7 @@ app.post('/wifi_toggle', (req, res) => {
                 break
             }
 
-        }
+        }*/
     }
     else if (target_state == 'OFF') {
         exec('sudo ifconfig wlan0 down', function (error, stdout, stderr) {
@@ -110,8 +111,9 @@ app.post('/wifi_toggle', (req, res) => {
                 res.status(200).send("Couldn't turn off wifi. Please make sure the app is tunning as root user or reboot the device if the problem persists.")
             }
         });
+        res.status(200).send('OFF')
         var flag = 0
-        while (true){
+        /*while (true){
             //console.log('waiting for wifi to turn off:' + flag)
             exec("ifconfig | grep 'wlan0' | awk '{print $1}'", function (error, stdout, stderr) {
                 console.log('stdout: ' + stdout)
@@ -121,10 +123,10 @@ app.post('/wifi_toggle', (req, res) => {
                 }
             });
             if (flag == 1){
-                res.status(200).send('OFF')
+                
                 break
             }
-        }
+        }*/
     }
 })
 
