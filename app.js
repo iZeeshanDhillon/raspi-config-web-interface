@@ -59,6 +59,7 @@ app.get('/network_status', (req, res) => {
             res.status(200).send('Could not get network status.')
         }
         if (!stdout.includes("DHCP")) {
+            console.log("sending static ip response")
             var ip_address = stdout.split(';')[0]
             var subnet = stdout.split(';')[1]
             var gateway = stdout.split(';')[2]
@@ -71,6 +72,7 @@ app.get('/network_status', (req, res) => {
             console.log(dns2)
             res.status(200).send({ static: true, ip_address: ip_address, subnet: subnet, gateway: gateway, dns: dns, dns2: dns2 })
         } else {
+            console.log("sending dhcp response")
             res.status(200).send({ static: false })
         }
     });
