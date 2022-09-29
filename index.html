@@ -294,7 +294,7 @@
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
           debugger;
-          if (this.readyState == 4 && this.status == 200) {
+          if (this.status == 200) {
             response_json = JSON.parse(this.responseText);
             wifi_power_status = response_json["wifi_power_status"];
             connected_to = response_json["connected_to"];
