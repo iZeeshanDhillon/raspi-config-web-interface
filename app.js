@@ -117,12 +117,6 @@ app.post('/wifi_toggle', (req, res) => {
             }
 
         }
-        fs.writeFile('.wifi', 'ON', function (err) {
-            if (err) {
-                res.status(200).send('null')
-            }
-        });
-        res.status(200).send('ON')
     }
     else if (target_state == 'OFF') {
         exec('sudo ifconfig wlan0 down', function (error, stdout, stderr) {
@@ -133,7 +127,7 @@ app.post('/wifi_toggle', (req, res) => {
         var flag = 0
         while (true){
             exec("ifconfig | grep 'wlan0' | awk '{print $1}'", function (error, stdout, stderr) {
-                if (!stdout+stderr.includes('wlan0')){
+                if (stdout+stderr.includes('wlan0') == false){
                     flag = 1
                 }
             });
@@ -141,14 +135,7 @@ app.post('/wifi_toggle', (req, res) => {
                 res.status(200).send('OFF')
                 break
             }
-
         }
-        fs.writeFile('.wifi', 'OFF', function (err) {
-            if (err) {
-                res.status(200).send('null')
-            }
-        });
-        res.status(200).send('OFF')
     }
 })
 
