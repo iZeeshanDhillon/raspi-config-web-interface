@@ -93,7 +93,7 @@ app.post('/wifi_toggle', (req, res) => {
             exec("ifconfig | grep 'wlan0' | awk '{print $1}'", function (error, stdout, stderr) {
                 console.log('stdout: ' + stdout)
                 console.log('stderr: ' + stderr)
-                if ((stdout+stderr).includes('wlan0')){
+                if ((stdout+stderr) != '') {
                     flag = 1
                 }
             });
@@ -116,7 +116,7 @@ app.post('/wifi_toggle', (req, res) => {
             exec("ifconfig | grep 'wlan0' | awk '{print $1}'", function (error, stdout, stderr) {
                 console.log('stdout: ' + stdout)
                 console.log('stderr: ' + stderr)
-                if ((stdout+stderr).includes('wlan0') == false){
+                if ((stdout+stderr) == ""){
                     flag = 1
                 }
             });
