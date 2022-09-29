@@ -58,18 +58,21 @@ app.get('/network_status', (req, res) => {
         if (error) {
             res.status(200).send('Could not get network status.')
         }
-        console.log(stdout + "====" + stderr)
-        /*var ip_address = stdout.split(';')[0]
-        var subnet = stdout.split(';')[1]
-        var gateway = stdout.split(';')[2]
-        var dns = stdout.split(';')[3]
-        var dns2 = stdout.split(';')[4]
-        console.log(ip_address)
-        console.log(subnet)
-        console.log(gateway)
-        console.log(dns)
-        console.log(dns2)
-        res.status(200).send({ ip_address: ip_address, subnet: subnet, gateway: gateway, dns: dns, dns2: dns2 }) */
+        if (!stdout.includes("DHCP")) {
+            var ip_address = stdout.split(';')[0]
+            var subnet = stdout.split(';')[1]
+            var gateway = stdout.split(';')[2]
+            var dns = stdout.split(';')[3]
+            var dns2 = stdout.split(';')[4]
+            console.log(ip_address)
+            console.log(subnet)
+            console.log(gateway)
+            console.log(dns)
+            console.log(dns2)
+            res.status(200).send({ static: true, ip_address: ip_address, subnet: subnet, gateway: gateway, dns: dns, dns2: dns2 })
+        } else {
+            res.status(200).send({ static: false })
+        }
     });
 })
 
