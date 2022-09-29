@@ -71,10 +71,8 @@ app.get('/network_status', (req, res) => {
             console.log(dns)
             console.log(dns2)
             res.status(200).send({ static: 1, ip_address: ip_address, subnet: subnet, gateway: gateway, dns: dns, dns2: dns2 })
-        } else {
-            console.log("sending dhcp response")
-            res.status(200).send("")
         }
+        res.status(200).send({ static: 0 })
     });
 })
 
