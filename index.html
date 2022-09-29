@@ -288,33 +288,31 @@
     </div>
     <script>
       //id="wifi-status-info">WiFi is <span style="color: green;">ON</span> and connected to <strong>Dhillon Family
-      status_info = document.getElementById("wifi-status-info");
-      var xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-          debugger;
-          var response = JSON.parse(xhr.responseText);
-          var response_json = JSON.stringify(response, null, 2);
-          var wifi_power_status = response.wifi_power_status;
-          var connected_to = response.connected_to;
-          if (wifi_power_status == "ON") {
-            if (connected_to == "") {
-              status_info.innerHTML = "WiFi is <span style='color: green;'>ON</span> and not connected to any network";
-            } 
+      function update_wifi_list(){
+        status_info = document.getElementById("wifi-status-info");
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            debugger;
+            var response = JSON.parse(xhr.responseText);
+            var response_json = JSON.stringify(response, null, 2);
+            var wifi_power_status = response.wifi_power_status;
+            var connected_to = response.connected_to;
+            if (wifi_power_status == "ON") {
+              if (connected_to == "") {
+                status_info.innerHTML = "WiFi is <span style='color: green;'>ON</span> and not connected to any network";
+              } 
+              else {
+                status_info.innerHTML = "WiFi is <span style='color: green;'>ON</span> and connected to <strong>" + connected_to + "</strong>";
+              }
+            }
             else {
-              status_info.innerHTML = "WiFi is <span style='color: green;'>ON</span> and connected to <strong>" + connected_to + "</strong>";
+              status_info.innerHTML = "WiFi is <span style='color: red;'>OFF</span>";
             }
           }
-          else {
-            status_info.innerHTML = "WiFi is <span style='color: red;'>OFF</span>";
-          }
         }
-      }
-      xhr.open("GET", "/wifi_status", true);
-      xhr.send();
-
-
-      function update_wifi_list(){
+        xhr.open("GET", "/wifi_status", true);
+        xhr.send();
           button = document.getElementById("wifi_toggle_button");
           if (button.innerHTML == "WiFi OFF"){
             wifi_list = document.getElementById("ssid_list");
