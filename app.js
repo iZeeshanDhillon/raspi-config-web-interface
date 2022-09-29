@@ -53,7 +53,18 @@ app.post('/static_ip', (req, res) => {
 })
 
 app.get('/network_status', (req, res) => {
-    
+    var exec = require('child_process').exec;
+    exec('bash network.sh', function (error, stdout, stderr) {
+        if (error) {
+            res.status(200).send('Could not get network status.')
+        }
+        var ip_address = stdout.split(';')[0]
+        var subnet = stdout.split(';')[1]
+        var gateway = stdout.split(';')[2]
+        var dns = stdout.split(';')[3]
+        var dns2 = stdout.split(';')[4]
+        res.status(200).send({ ip_address: ip_address, subnet: subnet, gateway: gateway, dns: dns, dns2: dns2 })
+    });
 })
 
 app.post('/use_dhcp', (req, res) => {
