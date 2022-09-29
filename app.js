@@ -54,7 +54,7 @@ app.post('/static_ip', (req, res) => {
 
 app.get('/network_status', (req, res) => {
     var exec = require('child_process').exec;
-    exec('bash network.sh', function (error, stdout, stderr) {
+    exec('./network.sh', function (error, stdout, stderr) {
         if (error) {
             console.log(error)
             res.status(200).send('Could not get network status.')
