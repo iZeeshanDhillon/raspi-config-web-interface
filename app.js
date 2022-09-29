@@ -182,7 +182,9 @@ app.get('/wifi_scan', (req, res) => {
                         }
                         networks_string = networks_string.slice(0, -1)
                         exec('iwgetid -r', function (error, stdout, stderr) {
-                            res.status(200).send({networks: networks_string, connected_to: stdout})
+                            //remove last character from SSID
+                            ssid = stdout.slice(0, -1)
+                            res.status(200).send({networks: networks_string, connected_to: ssid})
                         });
                 }
             });
