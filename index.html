@@ -285,6 +285,8 @@
     </div>
     <script>
       function update_wifi_list(){
+          //wait 5 seconds before updating the list
+          setTimeout(function(){}, 5000);
           button = document.getElementById("wifi_toggle_button");
           if (button.innerHTML == "WiFi OFF"){
             wifi_list = document.getElementById("ssid_list");
