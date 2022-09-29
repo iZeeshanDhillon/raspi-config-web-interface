@@ -295,7 +295,19 @@
           debugger;
           var response = JSON.parse(xhr.responseText);
           var response_json = JSON.stringify(response, null, 2);
-          console.log(response_json);
+          var wifi_power_status = response.wifi_power_status;
+          var connected_to = response.connected_to;
+          if (wifi_power_status == "ON") {
+            if (connected_to == "") {
+              status_info.innerHTML = "WiFi is <span style='color: green;'>ON</span> and not connected to any network";
+            } 
+            else {
+              status_info.innerHTML = "WiFi is <span style='color: green;'>ON</span> and connected to <strong>" + connected_to + "</strong>";
+            }
+          }
+          else {
+            status_info.innerHTML = "WiFi is <span style='color: red;'>OFF</span>";
+          }
         }
       }
       xhr.open("GET", "/wifi_status", true);

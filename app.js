@@ -72,7 +72,7 @@ app.get('/wifi_status', (req, res) => {
             exec("iwgetid -r", function (error, stdout, stderr) {
                 if ((stdout+stderr) == '') {
                     var wifi_power_status = "ON"
-                    var connected_to = "Not connected"
+                    var connected_to = ""
                 }
                 else {
                     var wifi_power_status = "ON"
@@ -84,7 +84,7 @@ app.get('/wifi_status', (req, res) => {
             });
         }
         else {
-            res.status(200).send({wifi_power_status: "OFF", connected_to: "Not connected"})
+            res.status(200).send({wifi_power_status: "OFF", connected_to: ""})
         }
     });
 })
