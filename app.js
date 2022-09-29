@@ -231,6 +231,18 @@ app.post('/set_username_password', (req, res) => {
 
 app.post('/open_folder', (req, res) => {
     var path = "/storage/0/Videos"
+    //check if folder doesn't exist
+    var fs = require('fs')
+    fs.exists(path, function (exists) {
+        if (!exists) {
+            //create folder
+            fs.mkdir(path, function (err) {
+                if (err) {
+                    res.status(200).send('Error occured while opening folder.')
+                }
+            });
+        }
+    });
     new_port = port + 1
     // run a simple http-server to serve the files in path
     var exec = require('child_process').exec;
