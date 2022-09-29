@@ -52,6 +52,10 @@ app.post('/static_ip', (req, res) => {
 
 })
 
+app.get('/network_status', (req, res) => {
+    
+})
+
 app.post('/use_dhcp', (req, res) => {
     cmd = "sed -i '/interface wlan0/d' /etc/dhcpcd.conf && sed -i '/static /d' /etc/dhcpcd.conf && ifconfig wlan0 down && ifconfig wlan0 up && sudo ip link set wlan0 up"
     var exec = require('child_process').exec;

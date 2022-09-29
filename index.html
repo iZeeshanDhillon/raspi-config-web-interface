@@ -197,7 +197,7 @@
                 <a href="#" class="myButton" onclick="set_static_ip()">Save</a>
                 <a href="#" class="myButton" onclick="user_dhcp()">Use DHCP</a>
                 <br><br>
-                <span>Using static IP</span>
+                <span id="ip_settings">Using static IP</span>
             </div>
         </form>
 
@@ -211,6 +211,18 @@
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
               if (this.readyState == 4 && this.status == 200) {
+                response_json = JSON.parse(this.responseText);
+                if (response_json.static = "true") {
+                    ip.value = response_json.ip;
+                    subnet.value = response_json.subnet;
+                    gateway.value = response_json.gateway;
+                    dns.value = response_json.dns;
+                    dns2.value = response_json.dns2;
+                    document.getElementById("ip_settings").innerHTML = "Using static IP";
+                } else {
+                    document.getElementById("ip_settings").innerHTML = "Using DHCP";
+                }
+              }
                 
             };
             xhttp.open("GET", "network_status", true);
