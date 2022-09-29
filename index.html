@@ -298,9 +298,8 @@
           var xhttp = new XMLHttpRequest();
           xhttp.onreadystatechange = function() {
             if (this.status == 503){
-              //wait for one second 
-              setTimeout(function(){}, 1000);
-              xhttp.send();
+              update_wifi_list();
+              return;
             }
             else if (this.status == 200) {
               //document.getElementById("demo").innerHTML = this.responseText;
