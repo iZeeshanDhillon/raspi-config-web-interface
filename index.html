@@ -303,6 +303,11 @@
               button.style.backgroundColor = "green";
               button.innerHTML = "WiFi ON";
               button.title = "Click to turn OFF";
+              if (connected_to == "") {
+                status_span.innerHTML = "WiFi is ON, but not connected to any network";
+              } else {
+                status_span.innerHTML = "WiFi is ON, connected to " + connected_to;
+              }
             }
             else {
               button.style.backgroundColor = "red";
@@ -311,6 +316,7 @@
               //empty list
               wifi_list = document.getElementById("ssid_list");
               wifi_list.innerHTML = "";
+              status_span.innerHTML = "WiFi is OFF";
             }
           }
         };
