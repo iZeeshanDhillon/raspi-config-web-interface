@@ -57,8 +57,10 @@ app.get('/network_status', (req, res) => {
     exec('./network.sh', function (error, stdout, stderr) {
         if (error) {
             console.log("============================================")
-            console.log(error)
+            console.log(stdout)
+            console.log("============================================")
             console.log(stderr)
+            console.log("============================================")
             console.log(error)
             console.log("============================================")
 
