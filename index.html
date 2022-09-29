@@ -214,7 +214,7 @@
               if (this.status == 200) {
                 debugger;
                 response_json = JSON.parse(this.responseText);
-                if (response_json.static = "true") {
+                if (response_json.static = 1) {
                     ip.value = response_json.ip;
                     subnet.value = response_json.subnet;
                     gateway.value = response_json.gateway;
