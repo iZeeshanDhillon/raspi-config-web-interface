@@ -99,31 +99,24 @@ app.post('/wifi_toggle', (req, res) => {
     var exec = require('child_process').exec;
     target_state = req.body.state
     if (target_state == 'ON') {
-        exec('sudo ifconfig wlan0 up && sudo ip link set wlan0 up', function (error, stdout, stderr) {
+        exec('sudo ifconfig wlan0 up', function (error, stdout, stderr) {
             if (error) {
                 res.status(200).send("Couldn't turn on wifi. Please make sure the app is tunning as root user or reboot the device if the problem persists.")
             }
         });
         var flag = 0
         while (true){
-            exec("ifconfig wlan0 | grep 'wlan0' | awk '{print $1}'", function (error, stdout, stderr) {
-                if (stdout){
-                    fs.writeFile('.wifi', 'ON', function (err) {
-                        if (err) {
-                            res.status(200).send('null')
-                        }
-                    });
-                    res.status(200).send('ON')
+            exec("ifconfig | grep 'wlan0' | awk '{print $1}'", function (error, stdout, stderr) {
+                if (stdout+stderr.includes('wlan0')){
                     flag = 1
                 }
             });
             if (flag == 1){
+                fs.writeFile('.wifi', 'ON', function (err) {});
+                res.status(200).send('ON')
                 break
             }
-            else {
-                //wait one second
-                require('deasync').sleep(1000);
-            }
+
         }
         fs.writeFile('.wifi', 'ON', function (err) {
             if (err) {
