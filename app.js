@@ -112,7 +112,6 @@ app.post('/wifi_toggle', (req, res) => {
                 }
             });
             if (flag == 1){
-                fs.writeFile('.wifi', 'ON', function (err) {});
                 res.status(200).send('ON')
                 break
             }
@@ -128,9 +127,22 @@ app.post('/wifi_toggle', (req, res) => {
     else if (target_state == 'OFF') {
         exec('sudo ifconfig wlan0 down', function (error, stdout, stderr) {
             if (error) {
-                res.status(200).send('null')
+                res.status(200).send("Couldn't turn off wifi. Please make sure the app is tunning as root user or reboot the device if the problem persists.")
             }
         });
+        var flag = 0
+        while (true){
+            exec("ifconfig | grep 'wlan0' | awk '{print $1}'", function (error, stdout, stderr) {
+                if (!stdout+stderr.includes('wlan0')){
+                    flag = 1
+                }
+            });
+            if (flag == 1){
+                res.status(200).send('OFF')
+                break
+            }
+
+        }
         fs.writeFile('.wifi', 'OFF', function (err) {
             if (err) {
                 res.status(200).send('null')
