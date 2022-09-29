@@ -208,7 +208,7 @@ app.post('/wifi_connect', (req, res) => {
                             res.status(200).send(error)
                         }
                         else {
-                            res.status(200).send('Connected to WiFi.')   
+                            res.status(200).send('Settings updated. It may take a few seconds to connect to the WiFi.')   
                         }
                     });
                 }
@@ -218,7 +218,7 @@ app.post('/wifi_connect', (req, res) => {
                             res.status(200).send(error)
                         }
                         else {
-                            res.status(200).send('Connected to WiFi.')   
+                            res.status(200).send('Settings updated. It may take a few seconds to connect to the WiFi.')     
                         }
                     });
                 }
