@@ -95,7 +95,7 @@
 
     <script>
       function set_static_ip() {
-        debugger;
+        
         form = document.getElementById("static_ip_form");
         //make a post request to the server and get response
         var xhttp = new XMLHttpRequest();
@@ -132,7 +132,7 @@
         };
         xhttp.open("POST", "set_username_password", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        debugger;
+        
         params = "existing_user=" + form.existing_user.value + "&username=" + form.username.value + "&password=" + form.password.value;
         xhttp.send(params);
       }
@@ -229,7 +229,7 @@
 <div id="wifi_modal" class="modal">
     <script>
       function toggle_wifi(){
-        debugger;
+        
         button = document.getElementById("wifi_toggle_button");
         if (button.innerHTML == "WiFi ON"){
           //send post request to /wifi_toggle with status=OFF
@@ -259,7 +259,7 @@
                 button.innerHTML = "WiFi ON";
                 button.style.backgroundColor = "green";
                 button.title = "Click to turn WiFi OFF";
-                debugger;
+                
                 update_wifi_list();
               }
             }
