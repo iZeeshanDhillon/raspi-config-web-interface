@@ -293,8 +293,8 @@
         //sends get request to /wifi_status to get the current status of wifi
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
-          debugger;
           if (this.status == 200) {
+            debugger;
             response_json = JSON.parse(this.responseText);
             wifi_power_status = response_json["wifi_power_status"];
             connected_to = response_json["connected_to"];
