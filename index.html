@@ -285,6 +285,12 @@
     </div>
     <script>
       function update_wifi_list(){
+          button = document.getElementById("wifi_toggle_button");
+          if (button.innerHTML == "WiFi OFF"){
+            wifi_list = document.getElementById("ssid_list");
+            wifi_list.innerHTML = "WiFi is OFF";
+            return;
+          }
           console.log("updating wifi list");
           loading_img = document.getElementById("loading_gif");
           loading_img.style.display = "block";
@@ -420,7 +426,6 @@
     }
     wifi_button.onclick = function() {
       wifi_modal.style.display = "block";
-      debugger;
       update_wifi_list();
     }
     file_button.onclick = function() {
