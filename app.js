@@ -76,7 +76,9 @@ app.get('/wifi_status', (req, res) => {
                 }
                 else {
                     var wifi_power_status = "ON"
-                    var connected_to = stdout
+                    //remove last character from SSID
+                    var ssid = stdout.slice(0, -1)
+                    var connected_to = ssid
                 }
                 res.status(200).send({wifi_power_status: wifi_power_status, connected_to: connected_to})
             });
