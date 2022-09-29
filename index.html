@@ -273,7 +273,7 @@
     <div class="modal-content" style="position: relative;">
         <span class="close3">&times;</span><br><br>
         <button id="wifi_toggle_button" style="position: absolute; top: 0; right: 0; margin: 10px; width: 100px; height: 30px; background-color: red; border: 0px;" title="Click to turn ON" onclick="toggle_wifi()">WiFi OFF</button>
-        <span id="ssid_list" style="position: absolute; top: 0; left: 0; margin: 10px; width: 100%; height: 100%;">WiFi is OFF</span>
+        
         <!-- create a scrollable div in the center of the modal -->
         <a href="#" onclick="update_wifi_list()">Refresh</a>
         <div style="overflow-y: scroll; height:150px; border: #000000 solid 1px;">
@@ -283,8 +283,13 @@
                 
             </ul>
         </div>
+        <br>
+        <span id="wifi-status-info"></strong></span>
     </div>
     <script>
+      //id="wifi-status-info">WiFi is <span style="color: green;">ON</span> and connected to <strong>Dhillon Family
+      status_info = document.getElementById("wifi-status-info");
+
       function update_wifi_list(){
           button = document.getElementById("wifi_toggle_button");
           if (button.innerHTML == "WiFi OFF"){
@@ -333,7 +338,7 @@
       xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           //document.getElementById("demo").innerHTML = this.responseText;
-          if (this.responseText == "ON") {
+          if (this.responseText.includes("ON:")) {
             button.style.backgroundColor = "green";
             button.innerHTML = "WiFi ON";
             button.title = "Click to turn OFF";
