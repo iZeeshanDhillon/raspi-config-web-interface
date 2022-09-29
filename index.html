@@ -289,13 +289,13 @@
     <script>
       //id="wifi-status-info">WiFi is <span style="color: green;">ON</span> and connected to <strong>Dhillon Family
       function update_wifi_list(){
-        /*debugger;
+        /*;
         status_info = document.getElementById("wifi-status-info");
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
-          debugger;
+          ;
           if (xhr.status == 200) {
-            debugger;
+            ;
             var response = JSON.parse(xhr.responseText);
             var response_json = JSON.stringify(response, null, 2);
             var wifi_power_status = response.wifi_power_status;
@@ -334,10 +334,11 @@
               response_json = JSON.parse(this.responseText);
               if(response_json.networks.includes("WiFi interface is busy")){
                 //display error message
+                debugger;
                 wifi_list.innerHTML = "<span style='color:red'>" + this.responseText + "</span>";
               }
               else {
-                debugger;
+                ;
                 ssids = response_json.networks.split(":");
                 //empty list
                 wifi_list.innerHTML = "";
