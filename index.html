@@ -287,20 +287,33 @@
         <span id="wifi-status-info"></strong></span>
     </div>
     <script>
-      /*function update_wifi_status(){
-          button = document.getElementById("wifi_toggle_button");
-          status_info = document.getElementById("wifi-status-info");
-
-          if (button.innerHTML == "WiFi ON" && response_json.connected_to == "") {
-            status_info.innerHTML = "WiFi is <span style='color: green;'>ON</span> and not connected to any network";
+      function update_wifi_status(){
+        var button = document.getElementById("wifi_toggle_button");
+        var status_span = document.getElementById("wifi-status-info");
+        //sends get request to /wifi_status to get the current status of wifi
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            response_json = JSON.parse(this.responseText);
+            //document.getElementById("demo").innerHTML = this.responseText;
+            if (this.responseText.includes("ON:")) {
+              button.style.backgroundColor = "green";
+              button.innerHTML = "WiFi ON";
+              button.title = "Click to turn OFF";
+            }
+            else {
+              button.style.backgroundColor = "red";
+              button.innerHTML = "WiFi OFF";
+              button.title = "Click to turn ON";
+              //empty list
+              wifi_list = document.getElementById("ssid_list");
+              wifi_list.innerHTML = "";
+            }
           }
-          else if (button.innerHTML == "WiFi ON" && response_json.connected_to != "") {
-            status_info.innerHTML = "WiFi is <span style='color: green;'>Turned ON</span> and connected to <strong>" + response_json.connected_to + strong>"
-          }
-          else {
-            status_info.innerHTML = "WiFi is <span style='color: red;'>Turned OFF</span>";
-          }
-      } */
+        };
+        xhttp.open("GET", "/wifi_status", true);
+        xhttp.send();
+      } 
 
       function update_wifi_list(){
                 
@@ -346,30 +359,6 @@
         }
     </script>
     <script>
-      button = document.getElementById("wifi_toggle_button");
-      //sends get request to /wifi_status to get the current status of wifi
-      var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          //document.getElementById("demo").innerHTML = this.responseText;
-          if (this.responseText.includes("ON:")) {
-            button.style.backgroundColor = "green";
-            button.innerHTML = "WiFi ON";
-            button.title = "Click to turn OFF";
-          }
-          else {
-            button.style.backgroundColor = "red";
-            button.innerHTML = "WiFi OFF";
-            button.title = "Click to turn ON";
-            //empty list
-            wifi_list = document.getElementById("ssid_list");
-            wifi_list.innerHTML = "";
-          }
-        }
-      };
-      xhttp.open("GET", "/wifi_status", true);
-      xhttp.send();
-
       function select_ssid(ssid){
         var password = prompt("Enter password for " + ssid);
         //make post request to /wifi_connect with ssid and password
