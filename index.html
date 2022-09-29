@@ -238,6 +238,7 @@
             if (this.readyState == 4 && this.status == 200) {
               if (this.responseText == "OFF"){
                 wifi_list = document.getElementById("ssid_list");
+                wifi_list.innerHTML = "";
                 button.innerHTML = "WiFi OFF";
                 button.style.backgroundColor = "red";
                 button.title = "Click to turn WiFi ON";
