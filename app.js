@@ -68,10 +68,10 @@ app.get('/wifi_status', (req, res) => {
     var exec = require('child_process').exec;
     exec("ifconfig | grep 'wlan0' | awk '{print $1}'", function (error, stdout, stderr) {
         if (stdout+stderr.includes('wlan0')) {
-            console.log('wifi is up')
+            console.log('wifi is up' + stdout + stderr)
             res.status(200).send('ON')
         } else {
-            console.log('wifi is down')
+            console.log('wifi is down' + stdout + stderr)
             res.status(200).send('OFF')
         }
     });
