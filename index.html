@@ -238,8 +238,6 @@
             if (this.readyState == 4 && this.status == 200) {
               if (this.responseText == "OFF"){
                 wifi_list = document.getElementById("ssid_list");
-                //set innerHTML of wifi_list to "WiFi is OFF"
-                wifi_list.innerHTML = "WiFi is OFF";
                 button.innerHTML = "WiFi OFF";
                 button.style.backgroundColor = "red";
                 button.title = "Click to turn WiFi ON";
@@ -330,7 +328,6 @@
           button = document.getElementById("wifi_toggle_button");
           if (button.innerHTML == "WiFi OFF"){
             wifi_list = document.getElementById("ssid_list");
-            wifi_list.innerHTML = "WiFi is OFF";
             return;
           }
           console.log("updating wifi list");
