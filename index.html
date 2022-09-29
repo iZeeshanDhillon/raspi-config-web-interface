@@ -243,7 +243,7 @@
                 button.style.backgroundColor = "red";
                 button.title = "Click to turn WiFi ON";
                 wifi_status_span = document.getElementById("wifi-status-info");
-                wifi_status_span.innerHTML = "WiFi is OFF";
+                wifi_status_span.innerHTML = "WiFi is <span style='color:red;'>Turned OFF</span>";
               }
             }
           };
@@ -305,9 +305,10 @@
               button.innerHTML = "WiFi ON";
               button.title = "Click to turn OFF";
               if (connected_to == "") {
-                status_span.innerHTML = "WiFi is ON, but not connected to any network";
-              } else {
-                status_span.innerHTML = "WiFi is ON, connected to " + connected_to;
+                status_span.innerHTML = "WiFi is <span style='color:green'>Turned ON</span>, Not connected";
+              }
+              else {
+                status_span.innerHTML = "WiFi is <span style='color:green'>Turned ON</span>, Connected to <strong>" + connected_to + "</strong>";
               }
             }
             else {
