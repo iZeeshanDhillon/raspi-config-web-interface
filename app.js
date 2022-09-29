@@ -121,6 +121,7 @@ app.post('/wifi_toggle', (req, res) => {
                 break
             }
             else {
+                //wait one second
                 require('deasync').sleep(1000);
             }
         }
