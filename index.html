@@ -401,10 +401,6 @@
 </div>
 <br>
 <div class="btn-group" style="width:100%">
-    <!-- make a button and center it horizontally -->
-    <button id="username_password_button" style="width:50%; margin: 0; position: absolute; left: 50%; top: 20%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);">
-        Change Username & Password
-    </button>
 </div>
 <br>
 <div class="btn-group" style="width:100%">
@@ -424,7 +420,6 @@
 
 <script>
     static_ip_button = document.getElementById("static_ip_button");
-    username_password_button = document.getElementById("username_password_button");
     wifi_button = document.getElementById("wifi_button");
     file_button = document.getElementById("file_button");
     // Get the modal
@@ -438,9 +433,6 @@
     // When the user clicks on the button, open the modal
     static_ip_button.onclick = function() {
       static_ip_modal.style.display = "block";
-    }
-    username_password_button.onclick = function() {
-      username_password_modal.style.display = "block";
     }
     wifi_button.onclick = function() {
       wifi_modal.style.display = "block";
