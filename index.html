@@ -331,14 +331,14 @@
               //document.getElementById("demo").innerHTML = this.responseText;
               loading_img.style.display = "none";
               wifi_list = document.getElementById("ssid_list");
-              // if response containsd ""WiFi interface is busy""
-              if(this.responseText.includes("WiFi interface is busy")){
+              response_json = JSON.parse(this.responseText);
+              if(response_json.networks.includes("WiFi interface is busy")){
                 //display error message
                 wifi_list.innerHTML = "<span style='color:red'>" + this.responseText + "</span>";
               }
               else {
                 debugger;
-                ssids = this.responseText.split(":");
+                ssids = response_json.networks.split(":");
                 //empty list
                 wifi_list.innerHTML = "";
 
