@@ -243,6 +243,8 @@
                 button.innerHTML = "WiFi OFF";
                 button.style.backgroundColor = "red";
                 button.title = "Click to turn WiFi ON";
+                wifi_status_span = document.getElementById("wifi-status-info");
+                wifi_status_span.innerHTML = "WiFi is OFF";
               }
             }
           };
@@ -316,7 +318,6 @@
               //empty list
               wifi_list = document.getElementById("ssid_list");
               wifi_list.innerHTML = "";
-              status_span.innerHTML = "WiFi is OFF";
             }
           }
         };
