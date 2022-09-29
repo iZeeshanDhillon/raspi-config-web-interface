@@ -56,7 +56,7 @@ app.get('/network_status', (req, res) => {
     var exec = require('child_process').exec;
     exec('./network.sh', function (error, stdout, stderr) {
         if (error) {
-            console.log(error)
+            console.log(stderr)
             res.status(200).send('Could not get network status.')
         }
         if (!stdout.includes("DHCP")) {
