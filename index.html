@@ -211,11 +211,9 @@
               //make a get request to the server and get response
               var xhttp = new XMLHttpRequest();
               xhttp.onreadystatechange = function() {
-                
                 if (this.status == 200) {
-                  
                   response_json = JSON.parse(this.responseText);
-                  if (response_json.static = 1) {
+                  if (response_json.static == 1) {
                       console.log("Using static IP");
                       console.log(response_json);
                       ip.value = response_json.ip_address;
@@ -235,7 +233,6 @@
                       document.getElementById("ip_settings").innerHTML = "Using DHCP IP.";
                   }
                 }
-                  
               };
               xhttp.open("GET", "network_status", true);
               xhttp.send();
