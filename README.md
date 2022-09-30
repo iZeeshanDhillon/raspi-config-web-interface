@@ -30,7 +30,7 @@ OR
 sudo /opt/nodejs/bin/node app.js
 ```
 
-Here is the screenshot of the UI
+## How does it look like
 
 #### Home Page
 ![alt home](assets/img.png "Home")
