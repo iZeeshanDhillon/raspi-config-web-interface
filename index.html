@@ -202,7 +202,6 @@
         </form>
 
         <script>
-            debugger;
             var ip = document.getElementById("ip_address");
             var subnet = document.getElementById("subnet");
             var gateway = document.getElementById("gateway");
@@ -211,6 +210,7 @@
             //make a get request to the server and get response
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
+              debugger;
               if (this.status == 200) {
                 debugger;
                 response_json = JSON.parse(this.responseText);
