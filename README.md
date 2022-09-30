@@ -2,18 +2,18 @@
 
 This app is developed to be used on Raspberry Pi for controlling basic settings from the browser like connecting to some WiFi network, setting up static IP address, changing username/password etc.
 
-## How to use 
+## How to use
 1. Login to the Pi as root user
-2. Clone this repository using this command
+2. Clone the repository and change directory to it
 ```
 git clone https://github.com/iZeeshanDhillon/raspi-config-web-interface.git
-```
-3. Change directory to the project directory and make the network.sh script executeable
-```
 cd raspi-config-web-interface
+```
+3. Make the network.sh script executeable
+```
 sudo chmod +x ./network.sh
 ```
-4. Run these commands to install dependencies 
+4. Run these commands to install dependencies
 ```
 wget -O - https://raw.githubusercontent.com/meech-ward/NodeJs-Raspberry-Pi/master/Install-Node.sh | sudo bash;
 echo "alias node=/opt/nodejs/bin/node" >> ~/.bashrc && source ~/.bashrc
