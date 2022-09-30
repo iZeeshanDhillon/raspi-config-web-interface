@@ -210,11 +210,12 @@
             //make a get request to the server and get response
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
-              debugger;
+              
               if (this.status == 200) {
-                debugger;
+                
                 response_json = JSON.parse(this.responseText);
                 if (response_json.static = 1) {
+                    console.log("Using static IP");
                     ip.value = response_json.ip;
                     subnet.value = response_json.subnet;
                     gateway.value = response_json.gateway;
@@ -222,7 +223,7 @@
                     dns2.value = response_json.dns2;
                     document.getElementById("ip_settings").innerHTML = "Using static IP";
                 } else {
-                    debugger;
+                    console.log("Using DHCP");
                     document.getElementById("ip_settings").innerHTML = "Using DHCP";
                 }
               }
@@ -327,7 +328,7 @@
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
           if (this.status == 200) {
-            debugger;
+            
             response_json = JSON.parse(this.responseText);
             wifi_power_status = response_json["wifi_power_status"];
             connected_to = response_json["connected_to"];
@@ -377,7 +378,7 @@
               response_json = JSON.parse(this.responseText);
               if(response_json.networks.includes("WiFi interface is busy")){
                 //display error message
-                debugger;
+                
                 wifi_list.innerHTML = "<span style='color:red'>" + response_json.networks + "</span>";
               }
               else {
