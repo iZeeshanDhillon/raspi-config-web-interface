@@ -224,6 +224,11 @@
                     document.getElementById("ip_settings").innerHTML = "Using static IP. The current values are in the fields above.";
                 } else {
                     console.log("Using DHCP");
+                    ip.value = "";
+                    subnet.value = "";
+                    gateway.value = "";
+                    dns.value = "";
+                    dns2.value = "";
                     document.getElementById("ip_settings").innerHTML = "Using DHCP IP.";
                 }
               }
