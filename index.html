@@ -211,6 +211,7 @@
             //make a get request to the server and get response
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
+              debugger;
               if (this.status == 200) {
                 debugger;
                 response_json = JSON.parse(this.responseText);
