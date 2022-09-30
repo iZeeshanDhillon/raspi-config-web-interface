@@ -17,17 +17,17 @@ sudo chmod +x ./network.sh
 ```
 wget -O - https://raw.githubusercontent.com/meech-ward/NodeJs-Raspberry-Pi/master/Install-Node.sh | sudo bash;
 echo "alias node=/opt/nodejs/bin/node" >> ~/.bashrc && source ~/.bashrc
-npm install http-server -g
-npm install express --save
+sudo npm install http-server -g
+sudo npm install express --save
 ```
 5. Use one of these commands to run the app
 
 ```
-node app.js
+sudo node app.js
 ```
 OR
 ```
-/opt/nodejs/bin/node app.js
+sudo /opt/nodejs/bin/node app.js
 ```
 
 Here is the screenshot of the UI
