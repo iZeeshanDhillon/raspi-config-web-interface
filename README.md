@@ -8,9 +8,10 @@ This app is developed to be used on Raspberry Pi for controlling basic settings 
 ```
 git clone https://github.com/iZeeshanDhillon/raspi-config-web-interface.git
 ```
-3. Change directory to the project directory with this command
+3. Change directory to the project directory and make the network.sh script executeable
 ```
 cd raspi-config-web-interface
+sudo chmod +x ./network.sh
 ```
 4. Run these commands to install dependencies 
 ```
