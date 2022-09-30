@@ -221,10 +221,10 @@
                     gateway.value = response_json.gateway;
                     dns.value = response_json.dns;
                     dns2.value = response_json.dns2;
-                    document.getElementById("ip_settings").innerHTML = "Using static IP";
+                    document.getElementById("ip_settings").innerHTML = "Using static IP. The current values are in the fields above.";
                 } else {
                     console.log("Using DHCP");
-                    document.getElementById("ip_settings").innerHTML = "Using DHCP";
+                    document.getElementById("ip_settings").innerHTML = "Using DHCP IP.";
                 }
               }
                 
