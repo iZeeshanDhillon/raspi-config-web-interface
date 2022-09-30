@@ -216,6 +216,7 @@
                 response_json = JSON.parse(this.responseText);
                 if (response_json.static = 1) {
                     console.log("Using static IP");
+                    console.log(response_json);
                     ip.value = response_json.ip_address;
                     subnet.value = response_json.subnet;
                     gateway.value = response_json.gateway;
@@ -224,6 +225,7 @@
                     document.getElementById("ip_settings").innerHTML = "Using static IP. The current values are in the fields above.";
                 } else {
                     console.log("Using DHCP");
+                    console.log(response_json);
                     ip.value = "";
                     subnet.value = "";
                     gateway.value = "";
