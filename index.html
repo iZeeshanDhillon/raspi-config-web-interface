@@ -202,42 +202,44 @@
         </form>
 
         <script>
-            var ip = document.getElementById("ip");
-            var subnet = document.getElementById("subnet");
-            var gateway = document.getElementById("gateway");
-            var dns = document.getElementById("dns");
-            var dns2 = document.getElementById("dns2");
-            //make a get request to the server and get response
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-              
-              if (this.status == 200) {
+          function update_network_settings() {
+              var ip = document.getElementById("ip");
+              var subnet = document.getElementById("subnet");
+              var gateway = document.getElementById("gateway");
+              var dns = document.getElementById("dns");
+              var dns2 = document.getElementById("dns2");
+              //make a get request to the server and get response
+              var xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function() {
                 
-                response_json = JSON.parse(this.responseText);
-                if (response_json.static = 1) {
-                    console.log("Using static IP");
-                    console.log(response_json);
-                    ip.value = response_json.ip_address;
-                    subnet.value = response_json.subnet;
-                    gateway.value = response_json.gateway;
-                    dns.value = response_json.dns;
-                    dns2.value = response_json.dns2;
-                    document.getElementById("ip_settings").innerHTML = "Using static IP. The current values are in the fields above.";
-                } else {
-                    console.log("Using DHCP");
-                    console.log(response_json);
-                    ip.value = "";
-                    subnet.value = "";
-                    gateway.value = "";
-                    dns.value = "";
-                    dns2.value = "";
-                    document.getElementById("ip_settings").innerHTML = "Using DHCP IP.";
+                if (this.status == 200) {
+                  
+                  response_json = JSON.parse(this.responseText);
+                  if (response_json.static = 1) {
+                      console.log("Using static IP");
+                      console.log(response_json);
+                      ip.value = response_json.ip_address;
+                      subnet.value = response_json.subnet;
+                      gateway.value = response_json.gateway;
+                      dns.value = response_json.dns;
+                      dns2.value = response_json.dns2;
+                      document.getElementById("ip_settings").innerHTML = "Using static IP. The current values are in the fields above.";
+                  } else {
+                      console.log("Using DHCP");
+                      console.log(response_json);
+                      ip.value = "";
+                      subnet.value = "";
+                      gateway.value = "";
+                      dns.value = "";
+                      dns2.value = "";
+                      document.getElementById("ip_settings").innerHTML = "Using DHCP IP.";
+                  }
                 }
-              }
-                
-            };
-            xhttp.open("GET", "network_status", true);
-            xhttp.send();
+                  
+              };
+              xhttp.open("GET", "network_status", true);
+              xhttp.send();
+          }
         </script>
 
     </div>
@@ -472,6 +474,7 @@
     span3 = document.getElementsByClassName("close3")[0];
     // When the user clicks on the button, open the modal
     static_ip_button.onclick = function() {
+      update_network_settings();
       static_ip_modal.style.display = "block";
     }
     wifi_button.onclick = function() {
