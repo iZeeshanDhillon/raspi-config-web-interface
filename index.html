@@ -216,7 +216,7 @@
                 response_json = JSON.parse(this.responseText);
                 if (response_json.static = 1) {
                     console.log("Using static IP");
-                    ip.value = response_json.ip;
+                    ip.value = response_json.ip_address;
                     subnet.value = response_json.subnet;
                     gateway.value = response_json.gateway;
                     dns.value = response_json.dns;
