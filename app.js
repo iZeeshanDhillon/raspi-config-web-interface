@@ -14,8 +14,8 @@ app.get('/', (req, res) => {
 })
 
 //create route for form submission
-app.post('/static_ip', (req, res) => { 
-    
+app.post('/static_ip', (req, res) => {
+
     //get request parameters
     var ip = req.body.ip;
     var subnet = req.body.mask;
@@ -56,23 +56,30 @@ app.get('/network_status', (req, res) => {
     var exec = require('child_process').exec;
     exec('./network.sh', function (error, stdout, stderr) {
         if (error) {
+            console.log("No res sent")
             res.status(200).send('Could not get network status.')
+            console.error(error)
         }
-        if (!stdout.includes("DHCP")) {
+        else if (!stdout.includes("DHCP")) {
             console.log("sending static ip response")
             var ip_address = stdout.split(';')[0]
             var subnet = stdout.split(';')[1]
             var gateway = stdout.split(';')[2]
             var dns = stdout.split(';')[3]
             var dns2 = stdout.split(';')[4]
-            res.status(200).send({ static: 1, ip_address: ip_address, subnet: subnet, gateway: gateway, dns: dns, dns2: dns2 })
+            return res.status(200).json({ static: 1, ip_address: ip_address, subnet: subnet, gateway: gateway, dns: dns, dns2: dns2 })
         }
         else {
             console.log("sending dhcp response")
-            res.status(200).send({ static: 0 })
+            try {
+                return res.status(200).json({ static: 0 })
+            }
+            catch (error) {
+                console.error(error)
+            }
         }
     });
-    
+
 })
 
 app.post('/use_dhcp', (req, res) => {
@@ -158,7 +165,7 @@ app.post('/wifi_toggle', (req, res) => {
                 }
             });
             if (flag == 1){
-                
+
                 break
             }
         }*/
@@ -231,7 +238,7 @@ app.post('/wifi_connect', (req, res) => {
                             res.status(200).send(error)
                         }
                         else {
-                            res.status(200).send('Settings updated. It may take a few seconds to connect to the WiFi.')   
+                            res.status(200).send('Settings updated. It may take a few seconds to connect to the WiFi.')
                         }
                     });
                 }
@@ -241,7 +248,7 @@ app.post('/wifi_connect', (req, res) => {
                             res.status(200).send(error)
                         }
                         else {
-                            res.status(200).send('Settings updated. It may take a few seconds to connect to the WiFi.')     
+                            res.status(200).send('Settings updated. It may take a few seconds to connect to the WiFi.')
                         }
                     });
                 }
