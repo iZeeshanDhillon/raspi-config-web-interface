@@ -5,7 +5,7 @@ dns1=""
 dns2=""
 subnet=""
 while IFS="" read -r p || [ -n "$p" ]; do
-    if [[ $p == interface\ wlan0* ]]; then
+    if [[ $p == interface\ eth0* ]]; then
         read -r ip_address || [ -n "$p" ]
         read -r router || [ -n "$p" ]
         read -r dns1 || [ -n "$p" ]

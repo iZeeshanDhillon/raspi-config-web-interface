@@ -32,7 +32,7 @@ app.post('/static_ip', (req, res) => {
         mask += ((octets[i] >>> 0).toString(2).match(/1/g) || []).length
     }
 
-    lines = "interface wlan0\nstatic ip_address=" + ip + "/" + mask + "\nstatic routers=" + gateway + "\nstatic domain_name_servers=" + dns + " " + dns2
+    lines = "interface eth0\nstatic ip_address=" + ip + "/" + mask + "\nstatic routers=" + gateway + "\nstatic domain_name_servers=" + dns + " " + dns2
     fs = require('fs')
     //Append data to file /etc/dhcpcd.conf
     fs.appendFile('/etc/dhcpcd.conf', lines, function (err) {
@@ -42,7 +42,7 @@ app.post('/static_ip', (req, res) => {
     });
     //Restart wifi interface
     var exec = require('child_process').exec;
-    exec('sudo ifconfig wlan0 down && sudo ifconfig wlan0 up && sudo ip link set wlan0 up', function (error, stdout, stderr) {
+    exec('sudo ifconfig eth0 down && sudo ifconfig eth0 up && sudo ip link set eth0 up', function (error, stdout, stderr) {
         if (error) {
             res.status(200).send('Could not restart wifi interface. Try rebooting the device.')
         }
@@ -83,7 +83,7 @@ app.get('/network_status', (req, res) => {
 })
 
 app.post('/use_dhcp', (req, res) => {
-    cmd = "sed -i '/interface wlan0/d' /etc/dhcpcd.conf && sed -i '/static /d' /etc/dhcpcd.conf && ifconfig wlan0 down && ifconfig wlan0 up && sudo ip link set wlan0 up"
+    cmd = "sed -i '/interface eth0/d' /etc/dhcpcd.conf && sed -i '/static /d' /etc/dhcpcd.conf && ifconfig eth0 down && ifconfig eth0 up && sudo ip link set eth0 up"
     var exec = require('child_process').exec;
     exec(cmd, function (error, stdout, stderr) {
         if (error) {
