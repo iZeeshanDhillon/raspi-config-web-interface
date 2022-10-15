@@ -9,9 +9,10 @@ This app is developed to be used on Raspberry Pi for controlling basic settings 
 git clone https://github.com/iZeeshanDhillon/raspi-config-web-interface.git
 cd raspi-config-web-interface
 ```
-3. Make the network.sh script executeable
+3. Make the network.sh script executeable and make directory
 ```
 sudo chmod +x ./network.sh
+mkdir -p /storage/0/Videos
 ```
 4. Run these commands to install dependencies
 ```
